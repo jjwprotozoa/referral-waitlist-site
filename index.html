@@ -137,10 +137,15 @@
 
     .referral-inputs {
       display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
     }
 
     .referral-inputs.show {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .referral-input-group {
@@ -470,7 +475,6 @@
         </div>
 
         <input type="hidden" name="referrer" id="referrerInput" />
-        <input type="hidden" name="referral_code" id="referralCodeInput" />
 
         <div class="checkbox-group">
           <input type="checkbox" id="wants_cv_help" name="wants_cv_help" />
@@ -549,13 +553,8 @@
   </div>
 
   <script>
-    // 🔒 SECURE: No exposed keys! Using Cloudflare Worker instead
+    // 🔒 SECURE: Using Cloudflare Worker instead of direct Supabase connection
     const WORKER_URL = 'https://waitlist-api.justwessels-cd3.workers.dev';
-
-    // Generate unique referral code
-    function generateReferralCode() {
-      return Math.random().toString(36).substring(2, 8).toUpperCase();
-    }
 
     // Capture ref from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -567,24 +566,13 @@
       header.innerHTML = `Get early access to quality job opportunities with verified employers<br><small style="color: #38a169;">✓ Referred by a friend</small>`;
     }
 
-    // Toggle referral inputs - Fixed the bug!
+    // Toggle referral inputs
     document.getElementById('wants_to_refer').addEventListener('change', function() {
       const referralInputs = document.getElementById('referralInputs');
       if (this.checked) {
         referralInputs.classList.add('show');
-        // Smooth animation
-        referralInputs.style.opacity = '0';
-        referralInputs.style.transform = 'translateY(-10px)';
-        setTimeout(() => {
-          referralInputs.style.transition = 'all 0.3s ease';
-          referralInputs.style.opacity = '1';
-          referralInputs.style.transform = 'translateY(0)';
-        }, 10);
       } else {
         referralInputs.classList.remove('show');
-        referralInputs.style.opacity = '';
-        referralInputs.style.transform = '';
-        referralInputs.style.transition = '';
       }
     });
 
@@ -606,9 +594,6 @@
       const data = Object.fromEntries(formData.entries());
       data.wants_cv_help = formData.get("wants_cv_help") ? true : false;
       data.wants_to_refer = document.getElementById('wants_to_refer').checked;
-      
-      // Add timestamp
-      data.created_at = new Date().toISOString();
 
       // Collect referral names
       const referralNames = [];
