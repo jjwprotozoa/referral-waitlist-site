@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Waitlist - Verified Job Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      background: #ffffff;
+      max-width: 540px;
+      width: 100%;
+      padding: 3rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
+
+    .header p {
+      color: #718096;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      color: #4a5568;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      transform: translateY(-1px);
+    }
+
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    select:hover {
+      border-color: #cbd5e0;
+    }
+
+    .referral-inputs {
+      display: none;
+    }
+
+    .referral-inputs.show {
+      display: block;
+    }
+
+    .referral-input-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .referral-input-group input {
+      margin: 0;
+    }
+
+    .referral-number {
+      background: #667eea;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+      padding: 1.25rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      transform: scale(1.1);
+      accent-color: #667eea;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      font-weight: 400;
+      color: #4a5568;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-btn .loading {
+      display: none;
+    }
+
+    .submit-btn.loading .loading {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+
+    .submit-btn.loading .text {
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .response {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+
+    .response.success {
+      background: #f0fff4;
+      color: #38a169;
+      border: 1px solid #9ae6b4;
+      display: block;
+    }
+
+    .response.error {
+      background: #fed7d7;
+      color: #e53e3e;
+      border: 1px solid #feb2b2;
+      display: block;
+    }
+
+    .required {
+      color: #e53e3e;
+    }
+
+    .feature-list {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #667eea;
+    }
+
+    .feature-list h3 {
+      color: #2d3748;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-list ul {
+      list-style: none;
+      color: #4a5568;
+      font-size: 0.9rem;
+    }
+
+    .feature-list li {
+      margin-bottom: 0.4rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #38a169;
+      font-weight: bold;
+    }
+
+    .referral-link-section {
+      background: #f0fff4;
+      border: 1px solid #9ae6b4;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .referral-link-section.show {
+      display: block;
+    }
+
+    .referral-link-section h3 {
+      color: #2d3748;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .link-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .link-display {
+      flex: 1;
+      padding: 0.75rem;
+      background: white;
+      border: 1px solid #c6f6d5;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: #38a169;
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: #2f855a;
+    }
+
+    .bonus-info {
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bonus-info.highlight {
+      background: #f0fff4;
+      border-color: #9ae6b4;
+      color: #2f855a;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+      }
+
+      .header h1 {
+        font-size: 1.75rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .link-container {
+        flex-direction: column;
+      }
+    }
+
+    .privacy-note {
+      font-size: 0.85rem;
+      color: #718096;
+      text-align: center;
+      margin-top: 1.5rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Join Our Verified Job Platform</h1>
+      <p>Get early access to quality job opportunities with verified employers</p>
+    </div>
+
+    <div class="feature-list">
+      <h3>What you'll get:</h3>
+      <ul>
+        <li>Early access to our platform</li>
+        <li>Verified job opportunities</li>
+        <li>Direct employer connections</li>
+        <li>Optional free CV assistance</li>
+        <li>Referral bonuses for bringing friends</li>
+      </ul>
+    </div>
+
+    <form id="signupForm">
+      <!-- Basic Info Section -->
+      <div class="form-section">
+        <div class="section-title">
+          👤 Your Information
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name <span class="required">*</span></label>
+            <input type="text" id="first_name" name="first_name" required />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="job_type">Job Type / Industry</label>
+          <select id="job_type" name="job_type">
+            <option value="">Select your field...</option>
+            <option value="Technology">Technology</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="Education">Education</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Design">Design</option>
+            <option value="Operations">Operations</option>
+            <option value="HR">Human Resources</option>
+            <option value="Legal">Legal</option>
+            <option value="Consulting">Consulting</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <input type="hidden" name="referrer" id="referrerInput" />
+        <input type="hidden" name="referral_code" id="referralCodeInput" />
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="wants_cv_help" name="wants_cv_help" />
+          <label for="wants_cv_help">I'd like free CV help if available</label>
+        </div>
+      </div>
+
+      <!-- Referral Section -->
+      <div class="form-section">
+        <div class="section-title">
+          🎁 Refer Friends (Optional)
+        </div>
+        
+        <div class="bonus-info">
+          <span>💡</span>
+          <span>Refer 5 friends who join and get <strong>FREE CV assistance</strong> automatically!</span>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="wants_to_refer" />
+          <label for="wants_to_refer">I want to refer friends for bonuses</label>
+        </div>
+
+        <div id="referralInputs" class="referral-inputs">
+          <p style="color: #4a5568; margin-bottom: 1rem; font-size: 0.95rem;">
+            Enter up to 5 friends' names (they'll need to use your referral link to join):
+          </p>
+          
+          <div class="referral-input-group">
+            <div class="referral-number">1</div>
+            <input type="text" name="referral_1" placeholder="Friend's full name" />
+          </div>
+          <div class="referral-input-group">
+            <div class="referral-number">2</div>
+            <input type="text" name="referral_2" placeholder="Friend's full name" />
+          </div>
+          <div class="referral-input-group">
+            <div class="referral-number">3</div>
+            <input type="text" name="referral_3" placeholder="Friend's full name" />
+          </div>
+          <div class="referral-input-group">
+            <div class="referral-number">4</div>
+            <input type="text" name="referral_4" placeholder="Friend's full name" />
+          </div>
+          <div class="referral-input-group">
+            <div class="referral-number">5</div>
+            <input type="text" name="referral_5" placeholder="Friend's full name" />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span class="loading">⟳</span>
+        <span class="text">Join Waitlist</span>
+      </button>
+    </form>
+
+    <div id="response" class="response"></div>
+
+    <!-- Referral Link Section (shown after signup) -->
+    <div id="referralLinkSection" class="referral-link-section">
+      <h3>🎉 Your Referral Link</h3>
+      <p style="margin-bottom: 1rem; color: #4a5568;">Share this link with your friends:</p>
+      <div class="link-container">
+        <div id="referralLink" class="link-display"></div>
+        <button id="copyBtn" class="copy-btn" onclick="copyReferralLink()">Copy</button>
+      </div>
+      <p style="font-size: 0.9rem; color: #718096;">
+        When your friends join using this link, you'll both get notified. Get 5 successful referrals for free CV help!
+      </p>
+    </div>
+
+    <div class="privacy-note">
+      We respect your privacy. Your information will only be used to notify you about our platform launch and provide the services you've requested.
+    </div>
+  </div>
+
+  <script>
+    // 🔒 SECURE: No exposed keys! Using Cloudflare Worker instead
+    const WORKER_URL = 'https://waitlist-api.justwessels-cd3.workers.dev';
+
+    // Generate unique referral code
+    function generateReferralCode() {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Capture ref from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+    if (ref) {
+      document.getElementById("referrerInput").value = ref;
+      // Show who referred them
+      const header = document.querySelector('.header p');
+      header.innerHTML = `Get early access to quality job opportunities with verified employers<br><small style="color: #38a169;">✓ Referred by a friend</small>`;
+    }
+
+    // Toggle referral inputs - Fixed the bug!
+    document.getElementById('wants_to_refer').addEventListener('change', function() {
+      const referralInputs = document.getElementById('referralInputs');
+      if (this.checked) {
+        referralInputs.classList.add('show');
+        // Smooth animation
+        referralInputs.style.opacity = '0';
+        referralInputs.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          referralInputs.style.transition = 'all 0.3s ease';
+          referralInputs.style.opacity = '1';
+          referralInputs.style.transform = 'translateY(0)';
+        }, 10);
+      } else {
+        referralInputs.classList.remove('show');
+        referralInputs.style.opacity = '';
+        referralInputs.style.transform = '';
+        referralInputs.style.transition = '';
+      }
+    });
+
+    const form = document.getElementById("signupForm");
+    const responseEl = document.getElementById("response");
+    const submitBtn = form.querySelector('.submit-btn');
+    const referralLinkSection = document.getElementById('referralLinkSection');
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      // Show loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+      responseEl.style.display = 'none';
+      responseEl.className = 'response';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      data.wants_cv_help = formData.get("wants_cv_help") ? true : false;
+      data.wants_to_refer = document.getElementById('wants_to_refer').checked;
+      
+      // Add timestamp
+      data.created_at = new Date().toISOString();
+
+      // Collect referral names
+      const referralNames = [];
+      for (let i = 1; i <= 5; i++) {
+        const name = formData.get(`referral_${i}`);
+        if (name && name.trim()) {
+          referralNames.push(name.trim());
+        }
+      }
+      data.referral_names = referralNames;
+
+      try {
+        // 🔒 SECURE: Call Worker instead of direct Supabase
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'Unknown error');
+        }
+
+        // Success - use the referral code from worker response
+        const userReferralCode = result.referral_code;
+
+        // Success
+        form.reset();
+        responseEl.textContent = "🎉 Welcome to the waitlist! We'll notify you as soon as we launch.";
+        responseEl.className = 'response success';
+        
+        // Show referral link if they want to refer
+        if (data.wants_to_refer) {
+          const currentUrl = window.location.origin + window.location.pathname;
+          const referralUrl = `${currentUrl}?ref=${userReferralCode}`;
+          document.getElementById('referralLink').textContent = referralUrl;
+          referralLinkSection.classList.add('show');
+          
+          // Scroll to referral link
+          setTimeout(() => {
+            referralLinkSection.scrollIntoView({ behavior: 'smooth' });
+          }, 500);
+        }
+
+        // Track success
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'signup', {
+            event_category: 'waitlist',
+            event_label: 'success',
+            referral_count: referralNames.length
+          });
+        }
+
+      } catch (error) {
+        console.error('Signup error:', error);
+        responseEl.textContent = "❌ Something went wrong. Please check your information and try again.";
+        responseEl.className = 'response error';
+        
+        // Track error
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'signup_error', {
+            event_category: 'waitlist',
+            event_label: error.message
+          });
+        }
+      } finally {
+        // Reset button state
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Copy referral link function
+    function copyReferralLink() {
+      const linkText = document.getElementById('referralLink').textContent;
+      navigator.clipboard.writeText(linkText).then(() => {
+        const copyBtn = document.getElementById('copyBtn');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      });
+    }
+
+    // Add input validation feedback
+    const inputs = form.querySelectorAll('input[required]');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.value.trim() === '') {
+          this.style.borderColor = '#e53e3e';
+        } else {
+          this.style.borderColor = '#e2e8f0';
+        }
+      });
+
+      input.addEventListener('input', function() {
+        if (this.style.borderColor === 'rgb(229, 62, 62)' && this.value.trim() !== '') {
+          this.style.borderColor = '#e2e8f0';
+        }
+      });
+    });
+
+    // Email validation
+    const emailInput = document.getElementById('email');
+    emailInput.addEventListener('blur', function() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (this.value && !emailRegex.test(this.value)) {
+        this.style.borderColor = '#e53e3e';
+      }
+    });
+  </script>
+</body>
+</html>
